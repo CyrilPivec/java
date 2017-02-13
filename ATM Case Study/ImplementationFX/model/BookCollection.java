@@ -96,6 +96,26 @@ public class BookCollection  extends EntityBase implements IView
 
 	}
 
+	public void findBooksWithAuthorLike(String author) {
+		String query = "SELECT * FROM " + myTableName + " WHERE author LIKE '%" + author + "%'";
+
+		Vector allDataRetrieved = getSelectQueryResult(query);
+		if (allDataRetrieved != null) {
+			for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
+				Properties nextAccountData = (Properties) allDataRetrieved.elementAt(cnt);
+
+				Book books = new Book(nextAccountData);
+
+				if (books != null) {
+					addBook(books);
+					//System.out.println(books);
+				}
+			}
+		}
+		System.out.println(allDataRetrieved);
+
+	}
+
 	private void addBook(Book a)
 	{
 		//accounts.add(a);

@@ -32,34 +32,90 @@ public class PatronCollection  extends EntityBase implements IView
             Exception
     {
         super(myTableName);
-
-
-
-
-
-        String query = "SELECT * FROM " + myTableName + " WHERE (OwnerID = " + 1 + ")";
-
-        Vector allDataRetrieved = getSelectQueryResult(query);
-
-        if (allDataRetrieved != null)
-        {
-            patrons = new Vector<Patron>();
-
-            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++)
-            {
-                Properties nextPatronData = (Properties)allDataRetrieved.elementAt(cnt);
-
-                Patron patron = new Patron(nextPatronData);
-
-                if (patron != null)
-                {
-                    addPatron(patron);
-                }
-            }
-
-        }
+        patrons = new Vector<Patron>();
 
     }
+
+    public void findPatronsOlderThan(String date) {
+        String query = "SELECT * FROM " + myTableName + " WHERE(dateOfBirth < " + date + ")";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+        if (allDataRetrieved != null) {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
+                Properties nextAccountData = (Properties) allDataRetrieved.elementAt(cnt);
+
+                Patron patron = new Patron(nextAccountData);
+
+                if (patron != null) {
+                    addPatron(patron);
+                    //System.out.println(books);
+                }
+            }
+        }
+        System.out.println(allDataRetrieved);
+
+    }
+
+    public void findPatronsYoungerThan(String date) {
+        String query = "SELECT * FROM " + myTableName + " WHERE(dateOfBirth > " + date + ")";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+        if (allDataRetrieved != null) {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
+                Properties nextAccountData = (Properties) allDataRetrieved.elementAt(cnt);
+
+                Patron patron = new Patron(nextAccountData);
+
+                if (patron != null) {
+                    addPatron(patron);
+                    //System.out.println(books);
+                }
+            }
+        }
+        System.out.println(allDataRetrieved);
+
+    }
+
+    public void findPatronsAtZipCode(String zip) {
+        String query = "SELECT * FROM " + myTableName + " WHERE(zip = " + zip + ")";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+        if (allDataRetrieved != null) {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
+                Properties nextAccountData = (Properties) allDataRetrieved.elementAt(cnt);
+
+                Patron patron = new Patron(nextAccountData);
+
+                if (patron != null) {
+                    addPatron(patron);
+                    //System.out.println(books);
+                }
+            }
+        }
+        System.out.println(allDataRetrieved);
+
+    }
+
+    public void findPatronsWithNameLike(String name) {
+        String query = "SELECT * FROM " + myTableName + " WHERE(name LIKE '%" + name + "%')";
+
+        Vector allDataRetrieved = getSelectQueryResult(query);
+        if (allDataRetrieved != null) {
+            for (int cnt = 0; cnt < allDataRetrieved.size(); cnt++) {
+                Properties nextAccountData = (Properties) allDataRetrieved.elementAt(cnt);
+
+                Patron patron = new Patron(nextAccountData);
+
+                if (patron != null) {
+                    addPatron(patron);
+                    //System.out.println(books);
+                }
+            }
+        }
+        System.out.println(allDataRetrieved);
+
+    }
+
 
     //----------------------------------------------------------------------------------
     private void addPatron(Patron a)
